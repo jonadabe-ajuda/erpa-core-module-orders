@@ -1,11 +1,14 @@
 package br.com.erpa.domain.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +31,8 @@ public class Orders {
 		
 	private Date dateInsert;
 	
-	@OneToMany
-	private HashSet<OrdersItem> listSetOrdemItem = new HashSet<OrdersItem>();
+	@OneToMany(mappedBy="ordem", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<OrdersItem> listSetOrdemItem = new ArrayList<OrdersItem>();
 
 	public Long getId() {
 		return id;
@@ -79,11 +82,11 @@ public class Orders {
 		this.totalValue = totalValue;
 	}
 
-	public HashSet<OrdersItem> getListSetOrdemItem() {
+	public List<OrdersItem> getListSetOrdemItem() {
 		return listSetOrdemItem;
 	}
 
-	public void setListSetOrdemItem(HashSet<OrdersItem> listSetOrdemItem) {
+	public void setListSetOrdemItem(List<OrdersItem> listSetOrdemItem) {
 		this.listSetOrdemItem = listSetOrdemItem;
 	}
 

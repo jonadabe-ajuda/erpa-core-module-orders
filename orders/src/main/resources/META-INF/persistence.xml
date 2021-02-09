@@ -6,7 +6,8 @@
 
     <persistence-unit name="erpa-loja">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>br.com.brasilprev.domain.customers.model.Customers</class>
+        <class>br.com.erpa.domain.model.Orders</class>
+        <class>br.com.erpa.domain.model.OrdersItem</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
@@ -24,7 +25,7 @@
     </persistence-unit>
     
     
-    <persistence-unit name="brasil-prev-ec2">
+    <persistence-unit name="erpa-loja-ec2">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>br.com.brasilprev.domain.customers.model.Customers</class>
 

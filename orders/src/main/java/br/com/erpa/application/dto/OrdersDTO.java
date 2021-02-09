@@ -30,6 +30,7 @@ public class OrdersDTO {
 	
 	@Valid
 	private HashSet<OrdersItemDTO> listSetOrdersItemDTOs = new HashSet<OrdersItemDTO>();
+	
 	public Long getNumber() {
 		return number;
 	}

@@ -102,13 +102,13 @@
 	</build>	
 	
 		  
-     <!-- distributionManagement>
+     <distributionManagement>
 	    <repository>
-	    	<id>repository.brasilprev.com</id>
+	    	<id>repository.erpa.com</id>
 	    	<name>S3 Release Repository ERP ViewWeb</name>
-	    	<url>s3://repository.brasilprev.com/registers/releases</url>
+	    	<url>s3://repository.erpa.com/orders/releases</url>
 	    </repository>	
-	  </distributionManagement-->   
+	  </distributionManagement>  
   
     
   

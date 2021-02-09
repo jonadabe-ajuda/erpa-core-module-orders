@@ -12,13 +12,12 @@ import javax.persistence.Query;
 
 import br.com.erpa.domain.entity.OrdersEntity;
 import br.com.erpa.domain.model.Orders;
-import br.com.erpa.domain.model.OrdersItem;
 import br.com.erpa.domain.repository.RepositoryOrders;
 
 public class RepositoryOrdersMysql implements RepositoryOrders {
 
 	private final String unitPersistence;
-	private BigDecimal totalValueOrder;
+	private BigDecimal totalValueOrder = BigDecimal.ZERO;
 	
 	public RepositoryOrdersMysql(String unitPersistence) {
 		this.unitPersistence = unitPersistence;
@@ -45,10 +44,12 @@ public class RepositoryOrdersMysql implements RepositoryOrders {
 		orders.setCustomersCPF(ordersEntity.getCustomersCPF());
 		orders.setCustomerName(ordersEntity.getCustomerName());
 		orders.setDescription(ordersEntity.getDescription());
-		orders.getListSetOrdemItem().addAll(ordersEntity.getListSetOrderItem());
-		for ( OrdersItem item : ordersEntity.getListSetOrderItem() ) {
+		ordersEntity.getListSetOrderItem().forEach( item -> {
+			item.setOrdem(orders);
+			orders.getListSetOrdemItem().add(item);
 			totalValueOrder = totalValueOrder.add(item.getValue());
-		}
+		});
+		ordersEntity.setTotalValue(totalValueOrder);
 		em.getTransaction().commit();
 		
 	}
@@ -105,7 +106,12 @@ public class RepositoryOrdersMysql implements RepositoryOrders {
 		orders.setCustomerName(ordersEntity.getCustomerName());
 		orders.setDescription(ordersEntity.getDescription());
 		orders.setDateInsert(new Date());
-		orders.getListSetOrdemItem().addAll(ordersEntity.getListSetOrderItem());
+		ordersEntity.getListSetOrderItem().forEach( item -> {
+			item.setOrdem(orders);
+			orders.getListSetOrdemItem().add(item);
+			totalValueOrder = totalValueOrder.add(item.getValue());
+		});
+		ordersEntity.setTotalValue(totalValueOrder);
 		return orders;
 	}
 
